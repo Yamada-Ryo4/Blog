@@ -1,0 +1,44 @@
+# ShokaX Theme Configuration
+# Documentation: https://docs.imlete.cn/ShokaX/
+
+title: LengFengY's Blog
+desc: A blog powered by Hexo and ShokaX
+lang: zh-CN
+# language: zh-CN
+
+# Menus
+menu:
+  Home: /
+  Archives: /archives/
+  Tags: /tags/
+  Categories: /categories/
+
+# Social Links
+social:
+  github: https://github.com
+  twitter: https://twitter.com
+
+# Avatar
+avatar: /images/avatar.jpg
+
+# Cover
+# cover: /images/cover.jpg
+
+# Footer
+copyright: © 2024 LengFengY. All rights reserved.
+
+# Highlight.js configuration
+highlight:
+  enable: true
+
+# Prismjs configuration
+prismjs:
+  enable: false
+
+# UIKit configuration
+uikit:
+  enable: true
+
+# Enable nyx-player
+nyx_player:
+  enable: true
