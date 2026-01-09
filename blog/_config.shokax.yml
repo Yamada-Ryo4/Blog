@@ -7,11 +7,10 @@ lang: zh-CN
 # language: zh-CN
 
 # 站點短名（顯示於頁首 artboard / 小字樣），請填入你想要的短名以替換預設的 testName
-alternate: "LFY"
+alternate: ""
 
 # Menus
 menu:
-  首页: /
   归档: /archives/
   标签: /tags/
   分类: /categories/
@@ -69,6 +68,10 @@ homeConfig:
 
 # Image configuration for random covers
 image_server: https://www.loliapi.com/acg/
+
+# Modules
+modules:
+  visibilityListener: false
 
 # Experimental features
 experiments:
