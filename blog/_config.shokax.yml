@@ -6,16 +6,19 @@ desc: A blog powered by Hexo and ShokaX
 lang: zh-CN
 # language: zh-CN
 
+# 站點短名（顯示於頁首 artboard / 小字樣），請填入你想要的短名以替換預設的 testName
+alternate: "LFY"
+
 # Menus
 menu:
-  Home: /
-  Archives: /archives/
-  Tags: /tags/
-  Categories: /categories/
+  首页: /
+  归档: /archives/
+  标签: /tags/
+  分类: /categories/
 
 # Social Links
 social:
-  github: https://github.com/yourname || github || "#191717"
+  github: https://github.com/Yamada-Ryo4 || github || "#191717"
   twitter: https://twitter.com/yourname || twitter || "#00aff0"
 
 # Ensure theme has fallback images to avoid build-time errors
@@ -65,7 +68,7 @@ homeConfig:
     enablePreload: true
 
 # Image configuration for random covers
-image_server: https://api.lixingyong.com/api/images
+image_server: https://www.loliapi.com/acg/
 
 # Experimental features
 experiments:
