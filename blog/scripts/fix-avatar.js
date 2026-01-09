@@ -22,6 +22,5 @@ function walk(dir) {
 if (fs.existsSync(publicDir)) {
   walk(publicDir);
 } else {
-  console.error('Public directory not found:', publicDir);
-  process.exitCode = 1;
+  console.warn('Public directory not found (skipping):', publicDir);
 }
