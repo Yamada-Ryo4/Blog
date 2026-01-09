@@ -26,12 +26,12 @@ image_list: []
 # Theme will append ?query parameter to each request for cache busting
 # Image server URL will be called like: https://api.lixingyong.com/api/images?random_number
 
-# Avatar
-avatar: https://pub-28a25d97afbd45fdba5366e39cf5f003.r2.dev/211214033.jpg
+# Avatar (now stored locally under `source/_data/assets`)
+avatar: 211214033.jpg
 
 # Sidebar configuration
 sidebar:
-  avatar: https://pub-28a25d97afbd45fdba5366e39cf5f003.r2.dev/211214033.jpg
+  avatar: 211214033.jpg
 
 # Cover
 # cover: /images/cover.jpg
