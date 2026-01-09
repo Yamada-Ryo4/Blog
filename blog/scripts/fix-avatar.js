@@ -3,15 +3,17 @@ const path = require('path');
 
 const publicDir = path.join(__dirname, '..', 'public');
 
-// CSS fixes for scroll performance
+// Critical CSS fixes for scroll jitter - injected directly into HTML
+// These complement the rules in app.styl to ensure highest priority
 const scrollFixesCSS = `<style>
-html, body { scrollbar-gutter: stable; }
-.waves { will-change: transform; transform: translateZ(0); -webkit-backface-visibility: hidden; backface-visibility: hidden; contain: layout style paint; }
-#sidebar.affix { z-index: 10; position: fixed; will-change: position; }
-#sidebar .panels { max-height: calc(100vh - 120px); overflow-y: auto; overflow-x: hidden; contain: layout; }
-#footer { min-height: 100px; contain: layout style; }
-#container { contain: content; }
-main { contain: content; }
+/* Reclaim native browser scrolling */
+html, body { overflow: auto !important; scrollbar-gutter: stable; }
+/* Break sidebar affix death loop - sticky keeps in doc flow */
+#sidebar.affix { position: sticky !important; top: 0; z-index: 10; }
+/* Force single-layer rendering */
+#main { opacity: 1 !important; background-color: white !important; }
+/* Immobilize header background */
+#imgs { position: fixed !important; transform: none !important; }
 </style>`;
 
 function walk(dir) {
