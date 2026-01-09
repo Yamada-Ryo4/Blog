@@ -21,12 +21,12 @@ social:
 # Ensure theme has fallback images to avoid build-time errors
 index_images: []
 image_list:
-  - /assets/404.png
-  - /assets/404.png
-  - /assets/404.png
-  - /assets/404.png
-  - /assets/404.png
-  - /assets/404.png
+  - /assets/cover1.svg
+  - /assets/cover2.svg
+  - /assets/cover3.svg
+  - /assets/cover4.svg
+  - /assets/cover5.svg
+  - /assets/cover6.svg
 
 # Avatar
 avatar: /images/avatar.jpg
