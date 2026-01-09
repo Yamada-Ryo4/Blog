@@ -52,7 +52,32 @@ body {
 
 /* Leave default overflow for html/body and avoid moving scroll to <main>. */
 
-/* 6. Meta theme-color updates should be atomic */
+/* 6. Large screen (desktop) optimizations - prevent affix jitter */
+@media (min-width: 992px) {
+  #sidebar {
+    /* Stabilize sidebar when it becomes .affix */
+    transition: none;
+  }
+
+  #sidebar.affix {
+    /* Lock sidebar height to prevent resize thrashing */
+    max-height: calc(100vh - 100px);
+    /* Ensure sidebar doesn't cause horizontal scroll when affixed */
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* Prevent content reflow when scrollbar appears/disappears */
+  main {
+    transition: none;
+  }
+
+  #container {
+    transition: none;
+  }
+}
+
+/* 7. Meta theme-color updates should be atomic */
 @supports (color: var(--theme)) {
   :root {
     --transition-none: all 0s linear;
