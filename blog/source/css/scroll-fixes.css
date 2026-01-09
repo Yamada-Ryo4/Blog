@@ -46,16 +46,11 @@ body {
   min-height: 40px;
 }
 
-/* 5. Prevent rapid reflow on scroll */
-html, body {
-  overflow: hidden;
-}
+/* 5. Keep document scrolling on body (do not change scroll container)
+   The theme JS relies on window scrolling; changing body to non-scroll
+   causes affix/scroll handlers to misbehave. */
 
-main {
-  overflow-y: scroll;
-  overflow-x: hidden;
-  height: 100vh;
-}
+/* Leave default overflow for html/body and avoid moving scroll to <main>. */
 
 /* 6. Meta theme-color updates should be atomic */
 @supports (color: var(--theme)) {
