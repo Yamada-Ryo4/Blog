@@ -20,16 +20,14 @@ social:
 
 # Ensure theme has fallback images to avoid build-time errors
 index_images: []
-image_list:
-  - /assets/cover1.svg
-  - /assets/cover2.svg
-  - /assets/cover3.svg
-  - /assets/cover4.svg
-  - /assets/cover5.svg
-  - /assets/cover6.svg
+image_list: []
+
+# Use image_server to fetch random images from API
+# Theme will append ?query parameter to each request for cache busting
+# Image server URL will be called like: https://api.lixingyong.com/api/images?random_number
 
 # Avatar
-avatar: /images/avatar.jpg
+avatar: https://pub-28a25d97afbd45fdba5366e39cf5f003.r2.dev/211214033.jpg
 
 # Cover
 # cover: /images/cover.jpg
@@ -55,6 +53,10 @@ nyx_player:
 
 # Disable cover generation when there are fewer than required images
 homeConfig:
+  gradient: false # 使用CSS渐变作为文章封面
+  # fixedCover 性能比默认的更好，且开启时将启用LCP优化和预加载
+  fixedCover: https://pub-28a25d97afbd45fdba5366e39cf5f003.r2.dev/yamada-ryo-lawson.jpg # 主页面cover
+  imageAPI: https://api.lixingyong.com/api/images # 文章随机封面API
   coverConfig:
     enableCover: false
 
