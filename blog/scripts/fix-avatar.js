@@ -6,10 +6,12 @@ const publicDir = path.join(__dirname, '..', 'public');
 // CSS fixes for scroll performance
 const scrollFixesCSS = `<style>
 html, body { scrollbar-gutter: stable; }
-.waves { will-change: transform; transform: translateZ(0); -webkit-backface-visibility: hidden; backface-visibility: hidden; }
-#sidebar.affix { z-index: 10; }
-#sidebar .panels { min-height: calc(100vh - 100px); overflow-y: auto; }
-#footer, #footer .widgets, #footer .status { min-height: 60px; }
+.waves { will-change: transform; transform: translateZ(0); -webkit-backface-visibility: hidden; backface-visibility: hidden; contain: layout style paint; }
+#sidebar.affix { z-index: 10; position: fixed; will-change: position; }
+#sidebar .panels { max-height: calc(100vh - 120px); overflow-y: auto; overflow-x: hidden; contain: layout; }
+#footer { min-height: 100px; contain: layout style; }
+#container { contain: content; }
+main { contain: content; }
 </style>`;
 
 function walk(dir) {

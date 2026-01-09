@@ -1,20 +1,31 @@
-/* Scroll Performance & Stability Fixes */
+/* ===================================================================
+   Comprehensive Scroll Performance & Stability Fixes
+   
+   Root causes addressed:
+   1. Scrollbar appearance/disappearance → scrollbar-gutter: stable
+   2. Layout recalculation during scroll → contain: layout paint style
+   3. Frequent repaint/reflow → GPU acceleration + will-change
+   4. Sidebar affix state thrashing → locked height + no transitions
+   5. Footer/widget height instability → fixed min-heights
+   =================================================================== */
 
-/* 1. Prevent layout shift when scrollbar appears/disappears */
-html {
+/* 1. UNIVERSAL SCROLLBAR STABILITY - prevents all layout shift */
+html, body {
   scrollbar-gutter: stable;
 }
 
-body {
-  scrollbar-gutter: stable;
+/* 2. HEADER & WAVE ANIMATION - GPU acceleration */
+#header {
+  will-change: transform;
+  contain: layout style paint;
 }
 
-/* 2. GPU acceleration for wave animation */
 .waves {
   will-change: transform;
   transform: translateZ(0);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  contain: layout style paint;
 }
 
 .waves use {
@@ -23,61 +34,133 @@ body {
   backface-visibility: hidden;
 }
 
-/* 3. Sidebar affix stability */
+.parallax {
+  will-change: transform;
+}
+
+/* 3. MAIN CONTENT AREA - isolate from scroll events */
+main {
+  contain: content;
+  will-change: scroll-position;
+}
+
+main > .inner {
+  contain: layout style paint;
+}
+
+/* 4. SIDEBAR - prevent reflow during affix state changes */
+#sidebar {
+  /* Disable transitions to avoid animation jank during affix toggle */
+  transition: none !important;
+}
+
+#sidebar.on,
 #sidebar.affix {
+  /* Lock dimensions during state change */
+  min-width: auto;
+  max-width: 100%;
+  contain: layout style paint;
+}
+
+#sidebar.affix {
+  position: fixed;
   z-index: 10;
+  will-change: position;
+}
+
+#sidebar .inner {
+  contain: layout style;
 }
 
 #sidebar .panels {
-  min-height: calc(100vh - 100px);
+  /* Stabilize panels container */
+  min-height: auto;
+  max-height: calc(100vh - 120px);
   overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  contain: layout;
 }
 
-/* 4. Footer & widget min-heights to prevent jitter */
+/* 5. FOOTER & WIDGETS - fixed minimum heights */
 #footer {
-  min-height: 120px;
+  min-height: 100px;
+  contain: layout style;
 }
 
 #footer .widgets {
-  min-height: 60px;
+  min-height: 40px;
+  contain: layout;
 }
 
 #footer .status {
-  min-height: 40px;
+  min-height: 30px;
 }
 
-/* 5. Keep document scrolling on body (do not change scroll container)
-   The theme JS relies on window scrolling; changing body to non-scroll
-   causes affix/scroll handlers to misbehave. */
+/* 6. QUICK NAVIGATION - prevent jitter */
+#quick {
+  will-change: opacity;
+  contain: layout style paint;
+}
 
-/* Leave default overflow for html/body and avoid moving scroll to <main>. */
+/* 7. TOOL PANEL - reduce reflow */
+#tool {
+  contain: layout style paint;
+}
 
-/* 6. Large screen (desktop) optimizations - prevent affix jitter */
-@media (min-width: 992px) {
-  #sidebar {
-    /* Stabilize sidebar when it becomes .affix */
-    transition: none;
-  }
+#tool.affix {
+  will-change: position;
+}
 
-  #sidebar.affix {
-    /* Lock sidebar height to prevent resize thrashing */
-    max-height: calc(100vh - 100px);
-    /* Ensure sidebar doesn't cause horizontal scroll when affixed */
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
+/* 8. BRAND/TITLE - smooth transitions without jank */
+#brand {
+  transition: none;
+}
 
-  /* Prevent content reflow when scrollbar appears/disappears */
-  main {
-    transition: none;
-  }
+#brand.affix {
+  will-change: transform;
+}
 
-  #container {
-    transition: none;
+/* 9. PREVENT GLOBAL REFLOW - lock critical ancestors */
+#container {
+  contain: content;
+}
+
+#page {
+  contain: layout style;
+}
+
+/* 10. SMOOTHING FOR SCROLL-DEPENDENT ANIMATIONS */
+* {
+  /* Globally disable pointer events during scroll for better performance */
+  scroll-behavior: auto;
+}
+
+@supports (scroll-behavior: smooth) {
+  html {
+    scroll-behavior: auto;
   }
 }
 
-/* 7. Meta theme-color updates should be atomic */
+/* 11. REMOVE ALL UNNECESSARY TRANSITIONS DURING SCROLL STATE CHANGES */
+.show-btn,
+.menu,
+.search,
+.theme {
+  transition: none;
+}
+
+/* 12. FORCE HARDWARE ACCELERATION ON KEY ELEMENTS */
+header,
+main,
+#sidebar,
+#footer {
+  transform: translateZ(0);
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* 13. META THEME-COLOR - atomic updates */
 @supports (color: var(--theme)) {
   :root {
     --transition-none: all 0s linear;
