@@ -15,8 +15,18 @@ menu:
 
 # Social Links
 social:
-  github: https://github.com
-  twitter: https://twitter.com
+  github: https://github.com/yourname || github || "#191717"
+  twitter: https://twitter.com/yourname || twitter || "#00aff0"
+
+# Ensure theme has fallback images to avoid build-time errors
+index_images: []
+image_list:
+  - /assets/404.png
+  - /assets/404.png
+  - /assets/404.png
+  - /assets/404.png
+  - /assets/404.png
+  - /assets/404.png
 
 # Avatar
 avatar: /images/avatar.jpg
@@ -42,3 +52,8 @@ uikit:
 # Enable nyx-player
 nyx_player:
   enable: true
+
+# Disable cover generation when there are fewer than required images
+homeConfig:
+  coverConfig:
+    enableCover: false
